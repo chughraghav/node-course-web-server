@@ -1,6 +1,9 @@
 const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs');
+
+const port = process.env.PORT || 3000;
+
 var app = express();
 
 hbs.registerPartials(__dirname + '/views/partials');
@@ -19,12 +22,12 @@ app.use((req, res, next)=>{
   next();
 });
 
-app.use((req, res, next)=> {
-  res.render('maintenance.hbs',{
-    pageTitle : 'Codes at work!',
-    welcomeMessage : 'We are upgrading the website. We will get back up soon. Sorry for the inconvinence.'
-  });
-});
+// app.use((req, res, next)=> {
+//   res.render('maintenance.hbs',{
+//     pageTitle : 'Codes at work!',
+//     welcomeMessage : 'We are upgrading the website. We will get back up soon. Sorry for the inconvinence.'
+//   });
+// });
 
 app.use(express.static(__dirname+'/Public'));
 
@@ -66,7 +69,7 @@ app.get('/bad',(req, res) => {
   });
 });
 
-app.listen(3000, ()=> {
+app.listen(port, ()=> {
   // console.log(__dirname);
-  console.log('Server is up and running on port 3000');
+  console.log(`Server is up and running on port ${port}`);
 });
